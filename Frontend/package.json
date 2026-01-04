@@ -1,0 +1,55 @@
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "chart.js": "^4.5.1",
+    "dayjs": "^1.11.19",
+    "html2canvas": "^1.4.1",
+    "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.562.0",
+    "moment": "^2.30.1",
+    "react": "^19.2.3",
+    "react-bootstrap": "^2.10.10",
+    "react-chartjs-2": "^5.3.1",
+    "react-dnd": "^16.0.1",
+    "react-dom": "^19.2.3",
+    "react-draggable": "^4.5.0",
+    "react-hook-form": "^7.69.0",
+    "react-icons": "^5.5.0",
+    "react-loader-spinner": "^8.0.0",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.11.0",
+    "react-select": "^5.10.2",
+    "react-toastify": "^11.0.5",
+    "recharts": "^3.6.0",
+    "redux": "^5.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^1.4.2",
+    "reselect": "^5.1.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "vite": "npm:rolldown-vite@7.2.5"
+  },
+  "overrides": {
+    "vite": "npm:rolldown-vite@7.2.5"
+  }
+}

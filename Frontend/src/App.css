@@ -1,0 +1,494 @@
+body {
+  font-family: "Nunito", "Nunito Sans", sans-serif;
+}
+.form-label{
+    font-size: 16px !important;
+}
+.sidebar-sticky {
+  position: sticky;
+  top: 0; 
+  height: 100vh;
+  overflow-y: auto;
+}
+
+
+.animate-icon {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+.dashboard-bg {
+  background: #f8f9fa;
+
+}
+.recharts-legend-item-text{
+  font-size: 12px !important;
+  margin-right: 10px !important;
+}
+
+/* ===== Stat Cards ===== */
+.stat-card {
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(150deg, #800020, rgb(165 41 32));
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(128, 0, 32, 0.25);
+}
+
+.stat-card p {
+  color: #f1dede !important;
+}
+
+.stat-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+/* ===== Cards ===== */
+.custom-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.custom-card-header {
+  background: transparent;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+  font-size: 16px;
+  color: #800020;
+}
+
+/* ===== Buttons ===== */
+.theme-btn {
+  background: linear-gradient(to bottom, #800020, rgb(159 35 25)) !important;
+  border: none;
+}
+
+.theme-btn:hover {
+  background-color: #660018 !important;
+}
+
+.custom-input {
+  height: 52px !important;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 14px !important;
+}
+.navbar-user-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+.navbar-user-location {
+  font-size: 14px;
+  color: #8f8f8f;
+}
+.dropdown-toggle::after{
+  display: none !important;
+}
+.form-label{
+  margin-bottom: 0px !important;
+}
+.them-btn{
+  background: linear-gradient(to bottom, #800020, rgb(159 35 25));
+  border: 0px;
+  padding: 7px 10px;
+ color: white;
+ border-radius: 8px;
+ font-family:"Nunito";
+
+}
+.them-font{
+   font-family:"Nunito";
+}
+.label{
+  font-weight: 400;
+}
+.event-btn {
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 10px;
+  background: transparent;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-weight: 600;
+}
+
+.green-btn {
+  border-color: #36c436;
+  color: #36c436;
+}
+
+.green-btn:hover {
+  background: #36c436;
+  color: white;
+}
+
+.dark-btn {
+  border-color: #444;
+  color: #444;
+}
+
+.dark-btn:hover {
+  background: #444;
+  color: white;
+}
+
+.red-btn {
+  border-color: #d93636;
+  color: #d93636;
+}
+
+.red-btn:hover {
+  background: #d93636;
+  color: white;
+}
+
+.status-btn {
+  border-color: #bbb;
+  color: #444;
+}
+
+.status-btn:hover {
+  background: #f3f3f3;
+}
+
+/* Remove bootstrap blue focus border */
+.event-btn:focus,
+.status-btn:focus {
+  box-shadow: none !important;
+}
+
+.basic-multi-select{
+  padding: 0px;
+  border: 0px;
+}
+
+.nav-link{
+  width: 200px;
+
+}
+.bg-tick{
+      background: linear-gradient(to bottom, #800020, rgb(159 35 25)) !important;
+
+}
+.nav-tabs .nav-link.active {
+    background: linear-gradient(to bottom, #800020, rgb(159 35 25)) !important;
+    color: #fff !important;
+    border: 0px;
+
+}
+.bg-new {
+  background: rgb(243, 243, 243) !important;
+}
+.nav-tabs .nav-link:hover {
+    background: white;
+}
+.nav-tabs .nav-link {
+   border: 1px solid rgb(236, 236, 236) !important;
+}
+.nav-link:hover{
+  color: #000 !important;
+  background: rgb(204, 204, 204);
+}
+
+.nav-tabs .nav-link {
+    color: #000; /* normal text color */
+}
+
+.custom-modal .modal-content {
+    border-radius: 30px !important;
+}
+.pagination-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.form-check-input:checked{
+  background-color:rgb(228, 66, 53) !important;
+  border-color: rgb(228, 66, 53) !important;
+}
+/* Previous / Next Buttons */
+.nav-btn {
+  padding: 3px 10px;
+  border: 1px solid rgb(228, 66, 53);
+  background: transparent;
+  color: rgb(228, 66, 53);
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100px;
+}
+
+.nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Middle pill background */
+.pages-box {
+  background: white;
+  padding: 8px 10px;
+  border-radius: 30px;
+  display: flex;
+  gap: 25px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* Page numbers */
+.page-number {
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #00303F;
+}
+
+/* Active circle */
+.page-number.active {
+
+  color: black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-select:focus{
+  border-color: none !important;
+}
+/* .calendar-container {
+  width: 90%;
+  max-width: 1600px;
+  margin: 10px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+} */
+
+/* Header Title */
+.fc-h-event .fc-event-title{
+    font-family: "Nunito";
+
+}
+.fc table thead {
+  background: rgba(225, 225, 225, 1) !important;
+  font-family: "Nunito";
+  font-size: 14px;
+  color: rgba(37, 37, 37, 1) !important;
+}
+
+.fc table thead a{
+   color: rgba(37, 37, 37, 1) !important;
+   text-decoration: none !important;
+}
+
+.fc .fc-daygrid-day-number{
+    color: rgba(37, 37, 37, 1) !important;
+   text-decoration: none !important;
+}
+.fc .fc-toolbar-title {
+  font-family: "Nunito";
+  font-size: 18px;
+  font-weight: 600;
+  
+}
+
+ .fc .fc-toolbar {
+  display: flex !important;
+  justify-content: center !important;
+}
+.fc .fc-scrollgrid-section-sticky {
+  background: red !important;
+}
+/* Navigation Buttons */
+.fc .fc-button {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #333 !important;
+  font-size: 16px;
+}
+
+/* Date Number */
+.fc .fc-daygrid-day-number {
+  font-size: 12px;
+  color: #777;
+}
+.fc-media-screen{
+    max-width:163vh;
+    margin: 0px auto;
+}
+/* Event Style */
+.fc-event {
+  font-size: 11px;
+  border-radius: 4px !important;
+  padding: 2px 4px !important;
+}
+
+/* Sunday Red Date */
+.fc-day-sun .fc-daygrid-day-number {
+  color: red !important;
+}
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;  /* adjust as needed */
+  margin: 20px auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 45px 12px 18px;
+  border: 1px solid #ccc;
+  border-radius: 30px; /* full rounded */
+  outline: none;
+  font-size: 14px;
+}
+
+.search-input::placeholder {
+  color: #b3b3b3;
+}
+
+.search-icon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #555;
+  cursor: pointer;
+}
+/* Dropdown Menu */
+.red-dropdown-menu {
+  background: #fff !important;
+  border-radius: 10px !important; 
+  padding: 8px 0 !important;
+  border: 1px solid rgba(221, 53, 53, 0.3) !important;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1) !important;
+  min-width: 180px;
+}
+
+/* Dropdown Items */
+.red-dropdown-item {
+  padding: 10px 16px !important;
+  font-size: 14px !important;
+  border-radius: 6px !important;
+  transition: 0.2s ease !important;
+}
+
+.red-dropdown-item:hover {
+  background: rgba(221, 53, 53, 0.1) !important;
+  color: rgba(221, 53, 53, 1) !important;
+}
+
+/* Divider */
+.red-dropdown-divider {
+  border-color: rgba(221, 53, 53, 0.2) !important;
+}
+
+/* Logout Red Highlight */
+.logout-item {
+  color: #dd3535 !important;
+  font-weight: 600 !important;
+}
+
+.logout-item:hover {
+  background: rgba(221, 53, 53, 0.15) !important;
+  color: #b02020 !important;
+}
+.event-layout-header {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 14px 20px;
+}
+
+.event-title {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Nunito";
+}
+
+/* Legend */
+.legend-wrapper {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.legend-box {
+  width: 18px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.legend-box.red {
+  background: #e44235;
+}
+
+.legend-box.blue {
+  background: #2daae1;
+}
+
+/* Close Button */
+.custom-close {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid #e44235;
+  color: #e44235;
+  background: transparent;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.custom-close:hover {
+  background: #e44235;
+  color: #fff;
+}
+.error-404 {
+  font-size: 80px;
+  font-weight: 800;
+  background: linear-gradient(
+    180deg,
+    #800020,
+    rgb(159 35 25)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+/* Animation */
+@keyframes pulseGlow {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(228, 66, 53, 0.5));
+  }
+  50% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 25px rgba(228, 66, 53, 0.8));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(228, 66, 53, 0.5));
+  }
+}
