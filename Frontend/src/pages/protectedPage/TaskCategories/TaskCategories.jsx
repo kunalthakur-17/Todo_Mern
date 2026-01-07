@@ -26,11 +26,16 @@ export default function TaskCategories() {
   const deleteCategoryReducer = store?.deleteCategoryReducer
   const deleteCategoryLoading = store?.deleteCategoryReducer?.loading
 
-  console.log(createCategoryReducer,"createCategoryReducer")
+  console.log('categoriesData:', categoriesData);
+  console.log('categoryLoading:', categoryLoading);
 
-  const categories = Array.isArray(categoriesData) 
-    ? categoriesData 
-    : categoriesData ? Object.values(categoriesData) : [];
+  // Handle the new response format with status, message, response structure
+  const categories = categoriesData?.response 
+    ? (Array.isArray(categoriesData.response) ? categoriesData.response : [])
+    : categoriesData && Array.isArray(categoriesData) ? categoriesData : [];
+
+  console.log('categories:', categories);
+  console.log('categories.length:', categories.length);
 
   const handleEdit = (category) => {
     setEditingCategory(category)
@@ -158,55 +163,59 @@ useEffect(() => {
             <h2 style={{ fontSize: '20px', fontWeight: '600', margin: 0, color: '#333', borderBottom: '3px solid #ff5722', paddingBottom: '5px', display: 'inline-block' }}>Categories</h2>
           </div>
 
-          {
-            categoryLoading ? <p>Loading...</p> : <>
-            
+          {categoryLoading ? (
+            <p>Loading...</p>
+          ) : (!categoriesData || !categories || categories.length === 0) ? (
+            <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+              <p style={{ fontSize: '18px', margin: 0 }}>No categories found. Add your first category to get started!</p>
+            </div>
+          ) : (
             <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #ddd', borderRadius: '8px', overflow: 'hidden' }}>
-            <thead>
-              <tr style={{ backgroundColor: '#f8f9fa' }}>
-                <th style={{ padding: '15px', textAlign: 'left', borderRight: '1px solid #ddd', fontWeight: '600', color: '#333' }}>SN</th>
-                <th style={{ padding: '15px', textAlign: 'left', borderRight: '1px solid #ddd', fontWeight: '600', color: '#333' }}>Category Name</th>
-                <th style={{ padding: '15px', textAlign: 'left', fontWeight: '600', color: '#333' }}>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {categories?.map((item, index) => (
-                <tr key={item._id} style={{ borderBottom: index < categories.length - 1 ? '1px solid #ddd' : 'none' }}>
-                  <td style={{ padding: '15px', borderRight: '1px solid #ddd', color: '#333' }}>{index + 1}</td>
-                  <td style={{ padding: '15px', borderRight: '1px solid #ddd', color: '#333' }}>{item.name}</td>
-                  <td style={{ padding: '15px' }}>
-                    <div style={{ display: 'flex', gap: '10px' }}>
-                      <button onClick={() => handleEdit(item)} style={{
-                        backgroundColor: '#ff5722',
-                        color: 'white',
-                        border: 'none',
-                        padding: '8px 16px',
-                        borderRadius: '4px',
-                        fontSize: '14px',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '5px'
-                      }}>✏️ Edit</button>
-                      <button onClick={() => handleDelete(item)} style={{
-                        backgroundColor: '#dc3545',
-                        color: 'white',
-                        border: 'none',
-                        padding: '8px 16px',
-                        borderRadius: '4px',
-                        fontSize: '14px',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '5px'
-                      }}>🗑️ Delete</button>
-                    </div>
-                  </td>
+              <thead>
+                <tr style={{ backgroundColor: '#f8f9fa' }}>
+                  <th style={{ padding: '15px', textAlign: 'left', borderRight: '1px solid #ddd', fontWeight: '600', color: '#333' }}>SN</th>
+                  <th style={{ padding: '15px', textAlign: 'left', borderRight: '1px solid #ddd', fontWeight: '600', color: '#333' }}>Category Name</th>
+                  <th style={{ padding: '15px', textAlign: 'left', fontWeight: '600', color: '#333' }}>Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table></>
-          }
+              </thead>
+              <tbody>
+                {categories?.map((item, index) => (
+                  <tr key={item._id} style={{ borderBottom: index < categories.length - 1 ? '1px solid #ddd' : 'none' }}>
+                    <td style={{ padding: '15px', borderRight: '1px solid #ddd', color: '#333' }}>{index + 1}</td>
+                    <td style={{ padding: '15px', borderRight: '1px solid #ddd', color: '#333' }}>{item.name}</td>
+                    <td style={{ padding: '15px' }}>
+                      <div style={{ display: 'flex', gap: '10px' }}>
+                        <button onClick={() => handleEdit(item)} style={{
+                          backgroundColor: '#ff5722',
+                          color: 'white',
+                          border: 'none',
+                          padding: '8px 16px',
+                          borderRadius: '4px',
+                          fontSize: '14px',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '5px'
+                        }}>✏️ Edit</button>
+                        <button onClick={() => handleDelete(item)} style={{
+                          backgroundColor: '#dc3545',
+                          color: 'white',
+                          border: 'none',
+                          padding: '8px 16px',
+                          borderRadius: '4px',
+                          fontSize: '14px',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '5px'
+                        }}>🗑️ Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
           
           
         </div>

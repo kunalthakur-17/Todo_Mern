@@ -12,17 +12,17 @@ function* loginSagaFunction({ payload }) {
     const response = yield call(loginApi, payload || {});
     if (response.status == 200) {
       // Store token and user data in localStorage
-      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('token', response.data.response.token);
       localStorage.setItem('user', JSON.stringify({
-        id: response.data.id,
-        firstName: response.data.firstName,
-        lastName: response.data.lastName,
-        email: response.data.email,
-        username: response.data.username
+        id: response.data.response.userId,
+        firstName: response.data.response.firstName,
+        lastName: response.data.response.lastName,
+        email: response.data.response.email,
+        username: response.data.response.username
       }));
       
       // Set authorization header with new token
-      setAuthorization(response.data.token);
+      setAuthorization(response.data.response.token);
       
       yield put({
         type: auth.LOGIN_SUCCESS,
@@ -77,17 +77,17 @@ function* signupSagaFunction({ payload }) {
     const response = yield call(signupApi, payload || {});
     if (response.status == 201) {
       // Store token and user data in localStorage
-      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('token', response.data.response.token);
       localStorage.setItem('user', JSON.stringify({
-        id: response.data.id,
-        firstName: response.data.firstName,
-        lastName: response.data.lastName,
-        email: response.data.email,
-        username: response.data.username
+        id: response.data.response.userId,
+        firstName: response.data.response.firstName,
+        lastName: response.data.response.lastName,
+        email: response.data.response.email,
+        username: response.data.response.username
       }));
       
       // Set authorization header with new token
-      setAuthorization(response.data.token);
+      setAuthorization(response.data.response.token);
       
       yield put({
         type: auth.SIGNUP_SUCCESS,

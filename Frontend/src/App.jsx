@@ -15,7 +15,6 @@ import TaskPriority from "./pages/protectedPage/TaskPriority/TaskPriority";
 import Settings from "./pages/protectedPage/Settings/Settings";
 import Help from "./pages/protectedPage/Help/Help";
 import Layout from "./components/Layout";
-import VitalsTask from "./pages/protectedPage/VitalsTask/VitalsTask";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -28,7 +27,6 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
-          <Route path="/vitals-task" element={<Layout><VitalsTask /></Layout>} />
           <Route path="/my-tasks" element={<Layout><MyTask /></Layout>} />
           <Route path="/task-categories" element={<Layout><TaskCategories /></Layout>} />
           <Route path="/task-status" element={<Layout><TaskStatus /></Layout>} />

@@ -19,6 +19,9 @@ export default function TaskStatus() {
   const getStatusData = store?.getStatusReducer?.data;
   const getStatusLoading = store?.getStatusReducer?.loading
 
+  console.log('getStatusData:', getStatusData);
+  console.log('getStatusLoading:', getStatusLoading);
+
   const updateStatusReducer = store?.updateStatusReducer
   const updateStatusLoading = store?.updateStatusReducer?.loading
 
@@ -30,9 +33,13 @@ export default function TaskStatus() {
 
   console.log(createStatusReducer,"createStatusReducer")
 
-  const getStatus = Array.isArray(getStatusData) 
-    ? getStatusData 
-    : getStatusData ? Object.values(getStatusData) : [];
+  // Handle the new response format with status, message, response structure
+  const getStatus = getStatusData?.response 
+    ? (Array.isArray(getStatusData.response) ? getStatusData.response : [])
+    : getStatusData && Array.isArray(getStatusData) ? getStatusData : [];
+
+  console.log('getStatus:', getStatus);
+  console.log('getStatus.length:', getStatus.length);
 
   const handleEdit = (category) => {
     setEditingCategory(category)
@@ -130,7 +137,7 @@ useEffect(() => {
       <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-          <h1 style={{ fontSize: '28px', fontWeight: 'bold', margin: 0, color: '#333' }}>Task Priorities</h1>
+          <h1 style={{ fontSize: '28px', fontWeight: 'bold', margin: 0, color: '#333' }}>Task Status</h1>
           <button style={{ 
             backgroundColor: 'transparent', 
             border: 'none', 
@@ -160,55 +167,59 @@ useEffect(() => {
             <h2 style={{ fontSize: '20px', fontWeight: '600', margin: 0, color: '#333', borderBottom: '3px solid #ff5722', paddingBottom: '5px', display: 'inline-block' }}>Priorities</h2>
           </div>
 
-          {
-            getStatusLoading ? <p>Loading...</p> : <>
-            
+          {getStatusLoading ? (
+            <p>Loading...</p>
+          ) : (!getStatusData || !getStatus || getStatus.length === 0) ? (
+            <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+              <p style={{ fontSize: '18px', margin: 0 }}>No task statuses found. Add your first status to get started!</p>
+            </div>
+          ) : (
             <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #ddd', borderRadius: '8px', overflow: 'hidden' }}>
-            <thead>
-              <tr style={{ backgroundColor: '#f8f9fa' }}>
-                <th style={{ padding: '15px', textAlign: 'left', borderRight: '1px solid #ddd', fontWeight: '600', color: '#333' }}>SN</th>
-                <th style={{ padding: '15px', textAlign: 'left', borderRight: '1px solid #ddd', fontWeight: '600', color: '#333' }}>Priority Name</th>
-                <th style={{ padding: '15px', textAlign: 'left', fontWeight: '600', color: '#333' }}>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {getStatus?.map((item, index) => (
-                <tr key={item._id} style={{ borderBottom: index < getStatus.length - 1 ? '1px solid #ddd' : 'none' }}>
-                  <td style={{ padding: '15px', borderRight: '1px solid #ddd', color: '#333' }}>{index + 1}</td>
-                  <td style={{ padding: '15px', borderRight: '1px solid #ddd', color: '#333' }}>{item.name}</td>
-                  <td style={{ padding: '15px' }}>
-                    <div style={{ display: 'flex', gap: '10px' }}>
-                      <button onClick={() => handleEdit(item)} style={{
-                        backgroundColor: '#ff5722',
-                        color: 'white',
-                        border: 'none',
-                        padding: '8px 16px',
-                        borderRadius: '4px',
-                        fontSize: '14px',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '5px'
-                      }}>✏️ Edit</button>
-                      <button onClick={() => handleDelete(item)} style={{
-                        backgroundColor: '#dc3545',
-                        color: 'white',
-                        border: 'none',
-                        padding: '8px 16px',
-                        borderRadius: '4px',
-                        fontSize: '14px',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '5px'
-                      }}>🗑️ Delete</button>
-                    </div>
-                  </td>
+              <thead>
+                <tr style={{ backgroundColor: '#f8f9fa' }}>
+                  <th style={{ padding: '15px', textAlign: 'left', borderRight: '1px solid #ddd', fontWeight: '600', color: '#333' }}>SN</th>
+                  <th style={{ padding: '15px', textAlign: 'left', borderRight: '1px solid #ddd', fontWeight: '600', color: '#333' }}>Priority Name</th>
+                  <th style={{ padding: '15px', textAlign: 'left', fontWeight: '600', color: '#333' }}>Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table></>
-          }
+              </thead>
+              <tbody>
+                {getStatus?.map((item, index) => (
+                  <tr key={item._id} style={{ borderBottom: index < getStatus.length - 1 ? '1px solid #ddd' : 'none' }}>
+                    <td style={{ padding: '15px', borderRight: '1px solid #ddd', color: '#333' }}>{index + 1}</td>
+                    <td style={{ padding: '15px', borderRight: '1px solid #ddd', color: '#333' }}>{item.name}</td>
+                    <td style={{ padding: '15px' }}>
+                      <div style={{ display: 'flex', gap: '10px' }}>
+                        <button onClick={() => handleEdit(item)} style={{
+                          backgroundColor: '#ff5722',
+                          color: 'white',
+                          border: 'none',
+                          padding: '8px 16px',
+                          borderRadius: '4px',
+                          fontSize: '14px',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '5px'
+                        }}>✏️ Edit</button>
+                        <button onClick={() => handleDelete(item)} style={{
+                          backgroundColor: '#dc3545',
+                          color: 'white',
+                          border: 'none',
+                          padding: '8px 16px',
+                          borderRadius: '4px',
+                          fontSize: '14px',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '5px'
+                        }}>🗑️ Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
           
           
         </div>

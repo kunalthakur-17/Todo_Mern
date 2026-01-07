@@ -4,6 +4,7 @@ import categorySaga from "./ProtectedRoute/Category/saga";
 import taskPrioritySaga from "./ProtectedRoute/TaskPriority/saga";
 import taskStatusSaga from "./ProtectedRoute/TaskStatus/saga";
 import taskSaga from "./ProtectedRoute/Task/saga";
+import dashboardSaga from "./ProtectedRoute/Dashboard/saga";
 
 
 export default function* rootSaga() {
@@ -13,7 +14,8 @@ export default function* rootSaga() {
     categorySaga(),
     taskPrioritySaga(),
     taskStatusSaga(),
-    taskSaga()
+    taskSaga(),
+    dashboardSaga()
    
   ]);
 }

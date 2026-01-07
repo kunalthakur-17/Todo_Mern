@@ -1,11 +1,8 @@
-const MyTask = require('../models/MyTask')
+const MyTask = require('../model/MyTask.model')
 
 const createTask = async(req,res)=>{
-       const {title, description} = req.body
+    const {title, description, categoryId, priorityId, statusId} = req.body
     const userId = req.user.id
-    const categoryId = req.CategoryModel.id
-    const priorityId = req.TaskPriorityModel.id
-    const statusId = req.TaskStatusModel.id
 try {
     const task = new MyTask({
         title,
@@ -17,9 +14,9 @@ try {
     })
     await task.save()
     res.status(201).json({
-        success: true,
+        status: 201,
         message: 'Task created successfully',
-        data: {
+        response: {
             _id: task._id,
             title: task.title,
             description: task.description,
@@ -33,27 +30,46 @@ try {
     })
 } catch (error) {
     res.status(500).json({
-        success: false,
+        status: 500,
         message: 'Failed to create task',
-        error: error.message
+        response: null
     })
 }
 }
 
 const getTasks = async(req,res)=>{
-    const userId = req.user.id
 try {
-    const tasks = await MyTask.find({userId}).populate('categoryId priorityId statusId')
+    if (!req.user || !req.user.id) {
+        return res.status(401).json({
+            status: 401,
+            message: 'User not authenticated',
+            response: null
+        })
+    }
+    
+    const userId = req.user.id
+    console.log('Getting tasks for userId:', userId)
+    
+    // Try with populate to get names
+    const tasks = await MyTask.find({userId})
+        .populate('categoryId', 'name')
+        .populate('priorityId', 'name') 
+        .populate('statusId', 'name')
+    
+    console.log('Found tasks:', tasks.length)
+    
     res.status(200).json({
-        success: true,
+        status: 200,
         message: 'Tasks retrieved successfully',
-        data: tasks
+        response: tasks
     })
 } catch (error) {
+    console.error('Get tasks error:', error.message)
+    console.error('Full error:', error)
     res.status(500).json({
-        success: false,
+        status: 500,
         message: 'Failed to retrieve tasks',
-        error: error.message
+        response: null
     })
 }
 }
@@ -65,20 +81,21 @@ try {
     const task = await MyTask.findOne({_id: id, userId}).populate('categoryId priorityId statusId')
     if(!task){
         return res.status(404).json({
-            success: false,
-            message: 'Task not found'
+            status: 404,
+            message: 'Task not found',
+            response: null
         })
     }
     res.status(200).json({
-        success: true,
+        status: 200,
         message: 'Task retrieved successfully',
-        data: task
+        response: task
     })
 } catch (error) {
     res.status(500).json({
-        success: false,
+        status: 500,
         message: 'Failed to retrieve task',
-        error: error.message
+        response: null
     })
 }
 }
@@ -95,21 +112,22 @@ try {
     
     if(!task){
         return res.status(404).json({
-            success: false,
-            message: 'Task not found'
+            status: 404,
+            message: 'Task not found',
+            response: null
         })
     }
     
     res.status(200).json({
-        success: true,
+        status: 200,
         message: 'Task updated successfully',
-        data: task
+        response: task
     })
 } catch (error) {
     res.status(500).json({
-        success: false,
+        status: 500,
         message: 'Failed to update task',
-        error: error.message
+        response: null
     })
 }
 }
@@ -121,19 +139,21 @@ try {
     const task = await MyTask.findOneAndDelete({_id: id, userId})
     if(!task){
         return res.status(404).json({
-            success: false,
-            message: 'Task not found'
+            status: 404,
+            message: 'Task not found',
+            response: null
         })
     }
     res.status(200).json({
-        success: true,
-        message: 'Task deleted successfully'
+        status: 200,
+        message: 'Task deleted successfully',
+        response: null
     })
 } catch (error) {
     res.status(500).json({
-        success: false,
+        status: 500,
         message: 'Failed to delete task',
-        error: error.message
+        response: null
     })
 }
 }

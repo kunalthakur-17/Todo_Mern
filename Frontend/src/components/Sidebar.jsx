@@ -25,11 +25,7 @@ const Sidebar = ({ collapsed }) => {
       icon: <LuLayoutDashboard />,
       label: "Dashboard",
     },
-       {
-      path: "/vitals-task",
-      icon: <MdOutlineInventory />,
-      label: "Vitals Task",
-    },
+      
     { path: "/my-tasks", icon: <BsClipboardCheck />, label: "My Tasks" },
     {
       path: "/task-categories",

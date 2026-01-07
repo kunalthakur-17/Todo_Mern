@@ -17,12 +17,15 @@ const createTaskStatus = async (req, res) => {
         }
         await taskStatus.save()
         res.status(201).json({
+            status: 201,
             message: 'Task status created successfully',
-            _id: taskStatus._id,
-            name: taskStatus.name,
-            userId: taskStatus.userId,
-            createdAt: taskStatus.createdAt,
-            updatedAt: taskStatus.updatedAt
+            response: {
+                _id: taskStatus._id,
+                name: taskStatus.name,
+                userId: taskStatus.userId,
+                createdAt: taskStatus.createdAt,
+                updatedAt: taskStatus.updatedAt
+            }
         })
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -39,7 +42,11 @@ async function getAllTaskStatuses(req, res) {
             createdAt: taskStatus.createdAt,
             updatedAt: taskStatus.updatedAt
         }))
-        res.status(200).json(formattedTaskStatuses)
+        res.status(200).json({
+            status: 200,
+            message: 'Task statuses retrieved successfully',
+            response: formattedTaskStatuses
+        })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -57,12 +64,15 @@ async function updateTaskStatus(req, res) {
             return res.status(404).json({ message: 'Task status not found' })
         }
         res.status(200).json({
+            status: 200,
             message: 'Task status updated successfully',
-            _id: taskStatus._id,
-            name: taskStatus.name,
-            userId: taskStatus.userId,
-            createdAt: taskStatus.createdAt,
-            updatedAt: taskStatus.updatedAt
+            response: {
+                _id: taskStatus._id,
+                name: taskStatus.name,
+                userId: taskStatus.userId,
+                createdAt: taskStatus.createdAt,
+                updatedAt: taskStatus.updatedAt
+            }
         })
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -78,7 +88,11 @@ async function deleteTaskStatus(req, res) {
         if (!taskStatus) {
             return res.status(404).json({ message: 'Task status not found' })
         }
-        res.status(200).json({ message: 'Task status deleted successfully' })
+        res.status(200).json({
+            status: 200,
+            message: 'Task status deleted successfully',
+            response: null
+        })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -93,7 +107,11 @@ async function getTaskStatusById(req, res) {
         if (!taskStatus) {
             return res.status(404).json({ message: 'Task status not found' })
         }
-        res.status(200).json(taskStatus)
+        res.status(200).json({
+            status: 200,
+            message: 'Task status retrieved successfully',
+            response: taskStatus
+        })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

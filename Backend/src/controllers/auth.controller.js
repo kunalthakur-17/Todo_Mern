@@ -136,14 +136,15 @@ async function registerUser(req, res) {
     =============================== */
     return res.status(201).json({
       status: 201,
-      success: true,
       message: "User registered successfully",
-      token,
-      userId: newUser._id,
-      firstName: newUser.firstName,
-      lastName: newUser.lastName,
-      email: newUser.email,
-      username: newUser.username,
+      response: {
+        token,
+        userId: newUser._id,
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+        email: newUser.email,
+        username: newUser.username,
+      }
     });
 
   } catch (err) {
@@ -218,14 +219,15 @@ async function loginUser(req, res) {
     =============================== */
     return res.status(200).json({
       status: 200,
-      success: true,
       message: "User logged in successfully",
-      token,
-      userId: user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      username: user.username,
+      response: {
+        token,
+        userId: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        username: user.username,
+      }
     });
 
   } catch (err) {
@@ -244,14 +246,15 @@ async function logOut(req, res){
       try {
         res.clearCookie("token")
         res.status(200).json({
-            success : true,
-            message : "User logged out successfully"
+            status: 200,
+            message: "User logged out successfully",
+            response: null
         })
     } catch (error) {
         res.status(500).json({
-            success : false,
-            message : "Internal server error"
-
+            status: 500,
+            message: "Internal server error",
+            response: null
         })
     }
 }

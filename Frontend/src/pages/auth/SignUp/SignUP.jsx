@@ -423,10 +423,10 @@ const SignUp = () => {
                     fontSize: "16px",
                     height: "54px",
                   }}
-                  // disabled={loading}
+                  disabled={loading}
                 >
-                  {/* {loading ? "Registering..." : "Register"} */}
-                  Register
+                   {loading ? "Registering..." : "Register"} 
+                  {/* Register */}
 
                 </button>
               </form>

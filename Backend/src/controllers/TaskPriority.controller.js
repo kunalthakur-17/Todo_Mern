@@ -17,12 +17,15 @@ const createTaskPriority = async (req, res) => {
         }
         await taskPriority.save()
         res.status(201).json({
+            status: 201,
             message: 'Task priority created successfully',
-            _id: taskPriority._id,
-            name: taskPriority.name,
-            userId: taskPriority.userId,
-            createdAt: taskPriority.createdAt,
-            updatedAt: taskPriority.updatedAt
+            response: {
+                _id: taskPriority._id,
+                name: taskPriority.name,
+                userId: taskPriority.userId,
+                createdAt: taskPriority.createdAt,
+                updatedAt: taskPriority.updatedAt
+            }
         })
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -39,7 +42,11 @@ async function getAllTaskPriorities(req, res) {
             createdAt: taskPriority.createdAt,
             updatedAt: taskPriority.updatedAt
         }))
-        res.status(200).json(formattedTaskPriorities)
+        res.status(200).json({
+            status: 200,
+            message: 'Task priorities retrieved successfully',
+            response: formattedTaskPriorities
+        })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -57,12 +64,15 @@ async function updateTaskPriority(req, res) {
             return res.status(404).json({ message: 'Task priority not found' })
         }
         res.status(200).json({
+            status: 200,
             message: 'Task priority updated successfully',
-            _id: taskPriority._id,
-            name: taskPriority.name,
-            userId: taskPriority.userId,
-            createdAt: taskPriority.createdAt,
-            updatedAt: taskPriority.updatedAt
+            response: {
+                _id: taskPriority._id,
+                name: taskPriority.name,
+                userId: taskPriority.userId,
+                createdAt: taskPriority.createdAt,
+                updatedAt: taskPriority.updatedAt
+            }
         })
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -78,7 +88,11 @@ async function deleteTaskPriority(req, res) {
         if (!taskPriority) {
             return res.status(404).json({ message: 'Task priority not found' })
         }
-        res.status(200).json({ message: 'Task priority deleted successfully' })
+        res.status(200).json({
+            status: 200,
+            message: 'Task priority deleted successfully',
+            response: null
+        })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -93,7 +107,11 @@ async function getTaskPriorityById(req, res) {
         if (!taskPriority) {
             return res.status(404).json({ message: 'Task priority not found' })
         }
-        res.status(200).json(taskPriority)
+        res.status(200).json({
+            status: 200,
+            message: 'Task priority retrieved successfully',
+            response: taskPriority
+        })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

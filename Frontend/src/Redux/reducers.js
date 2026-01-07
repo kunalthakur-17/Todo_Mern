@@ -24,6 +24,7 @@ import {
   updateTaskReducer,
   deleteTaskReducer,
 } from "./ProtectedRoute/Task/reducer";
+import { getDashboardReducer } from "./ProtectedRoute/Dashboard/reducer";
 
 export default combineReducers({
   // auth
@@ -51,4 +52,6 @@ export default combineReducers({
   createTaskReducer,
   updateTaskReducer,
   deleteTaskReducer,
+  // Dashboard
+  getDashboardReducer,
 });

@@ -20,12 +20,15 @@ const createCategory = async (req, res) => {
         }
         await category.save()
         res.status(201).json({
+            status: 201,
             message: 'Category created successfully',
-            _id: category._id,
-            name: category.name,
-            userId: category.userId,
-            createdAt: category.createdAt,
-            updatedAt: category.updatedAt
+            response: {
+                _id: category._id,
+                name: category.name,
+                userId: category.userId,
+                createdAt: category.createdAt,
+                updatedAt: category.updatedAt
+            }
         })
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -42,7 +45,11 @@ async function getAllCategories(req, res) {
             createdAt: category.createdAt,
             updatedAt: category.updatedAt
         }))
-        res.status(200).json(formattedCategories)
+        res.status(200).json({
+            status: 200,
+            message: 'Categories retrieved successfully',
+            response: formattedCategories
+        })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -61,12 +68,15 @@ async function updateCategory(req, res) {
             return res.status(404).json({ message: 'Category not found' })
         }
         res.status(200).json({
+            status: 200,
             message: 'Category updated successfully',
-            _id: category._id,
-            name: category.name,
-            userId: category.userId,
-            createdAt: category.createdAt,
-            updatedAt: category.updatedAt
+            response: {
+                _id: category._id,
+                name: category.name,
+                userId: category.userId,
+                createdAt: category.createdAt,
+                updatedAt: category.updatedAt
+            }
         })
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -82,7 +92,11 @@ async function deleteCategory(req, res) {
         if (!category) {
             return res.status(404).json({ message: 'Category not found' })
         }
-        res.status(200).json({ message: 'Category deleted successfully' })
+        res.status(200).json({
+            status: 200,
+            message: 'Category deleted successfully',
+            response: null
+        })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -98,7 +112,11 @@ async function getCategoryById(req, res) {
         if (!category) {
             return res.status(404).json({ message: 'Category not found' })
         }
-        res.status(200).json(category)
+        res.status(200).json({
+            status: 200,
+            message: 'Category retrieved successfully',
+            response: category
+        })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

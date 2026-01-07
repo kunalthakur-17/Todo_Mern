@@ -1,10 +1,4 @@
 
-
-
-      
-
-
-
 import React, { use, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -34,11 +28,15 @@ export default function TaskPriority() {
   const deletePriorityReducer = store?.deletePriorityReducer
   const deletePriorityLoading = store?.deletePriorityReducer?.loading
 
-  console.log(createPriorityReducer,"createPriorityReducer")
+  console.log('getPrioritiesData:', getPrioritiesData);
+  console.log('getPrioritiesLoading:', getPrioritiesLoading);
 
-  const getPriorities = Array.isArray(getPrioritiesData) 
-    ? getPrioritiesData 
-    : getPrioritiesData ? Object.values(getPrioritiesData) : [];
+  // Handle the new response format with status, message, response structure
+  const getPriorities = getPrioritiesData?.response 
+    ? (Array.isArray(getPrioritiesData.response) ? getPrioritiesData.response : [])
+    : [];
+
+  console.log('getPriorities:', getPriorities);
 
   const handleEdit = (category) => {
     setEditingCategory(category)
@@ -166,55 +164,59 @@ useEffect(() => {
             <h2 style={{ fontSize: '20px', fontWeight: '600', margin: 0, color: '#333', borderBottom: '3px solid #ff5722', paddingBottom: '5px', display: 'inline-block' }}>Priorities</h2>
           </div>
 
-          {
-            getPrioritiesLoading ? <p>Loading...</p> : <>
-            
+          {getPrioritiesLoading ? (
+            <p>Loading...</p>
+          ) : getPriorities?.length > 0 ? (
             <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #ddd', borderRadius: '8px', overflow: 'hidden' }}>
-            <thead>
-              <tr style={{ backgroundColor: '#f8f9fa' }}>
-                <th style={{ padding: '15px', textAlign: 'left', borderRight: '1px solid #ddd', fontWeight: '600', color: '#333' }}>SN</th>
-                <th style={{ padding: '15px', textAlign: 'left', borderRight: '1px solid #ddd', fontWeight: '600', color: '#333' }}>Priority Name</th>
-                <th style={{ padding: '15px', textAlign: 'left', fontWeight: '600', color: '#333' }}>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {getPriorities?.map((item, index) => (
-                <tr key={item._id} style={{ borderBottom: index < getPriorities.length - 1 ? '1px solid #ddd' : 'none' }}>
-                  <td style={{ padding: '15px', borderRight: '1px solid #ddd', color: '#333' }}>{index + 1}</td>
-                  <td style={{ padding: '15px', borderRight: '1px solid #ddd', color: '#333' }}>{item.name}</td>
-                  <td style={{ padding: '15px' }}>
-                    <div style={{ display: 'flex', gap: '10px' }}>
-                      <button onClick={() => handleEdit(item)} style={{
-                        backgroundColor: '#ff5722',
-                        color: 'white',
-                        border: 'none',
-                        padding: '8px 16px',
-                        borderRadius: '4px',
-                        fontSize: '14px',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '5px'
-                      }}>✏️ Edit</button>
-                      <button onClick={() => handleDelete(item)} style={{
-                        backgroundColor: '#dc3545',
-                        color: 'white',
-                        border: 'none',
-                        padding: '8px 16px',
-                        borderRadius: '4px',
-                        fontSize: '14px',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '5px'
-                      }}>🗑️ Delete</button>
-                    </div>
-                  </td>
+              <thead>
+                <tr style={{ backgroundColor: '#f8f9fa' }}>
+                  <th style={{ padding: '15px', textAlign: 'left', borderRight: '1px solid #ddd', fontWeight: '600', color: '#333' }}>SN</th>
+                  <th style={{ padding: '15px', textAlign: 'left', borderRight: '1px solid #ddd', fontWeight: '600', color: '#333' }}>Priority Name</th>
+                  <th style={{ padding: '15px', textAlign: 'left', fontWeight: '600', color: '#333' }}>Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table></>
-          }
+              </thead>
+              <tbody>
+                {getPriorities?.map((item, index) => (
+                  <tr key={item._id} style={{ borderBottom: index < getPriorities.length - 1 ? '1px solid #ddd' : 'none' }}>
+                    <td style={{ padding: '15px', borderRight: '1px solid #ddd', color: '#333' }}>{index + 1}</td>
+                    <td style={{ padding: '15px', borderRight: '1px solid #ddd', color: '#333' }}>{item.name}</td>
+                    <td style={{ padding: '15px' }}>
+                      <div style={{ display: 'flex', gap: '10px' }}>
+                        <button onClick={() => handleEdit(item)} style={{
+                          backgroundColor: '#ff5722',
+                          color: 'white',
+                          border: 'none',
+                          padding: '8px 16px',
+                          borderRadius: '4px',
+                          fontSize: '14px',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '5px'
+                        }}>✏️ Edit</button>
+                        <button onClick={() => handleDelete(item)} style={{
+                          backgroundColor: '#dc3545',
+                          color: 'white',
+                          border: 'none',
+                          padding: '8px 16px',
+                          borderRadius: '4px',
+                          fontSize: '14px',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '5px'
+                        }}>🗑️ Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+              <p style={{ fontSize: '18px', margin: 0 }}>No task priorities found. Add your first priority to get started!</p>
+            </div>
+          )}
           
           
         </div>

@@ -30,8 +30,9 @@ export const getPriorityById = `${baseurl}/taskpriority`;
 // Task
 export const getTasks = `${baseurl}/task`;
 export const createTask = `${baseurl}/task`;
-export const updateTask = `${baseurl}/task`;
-export const deleteTask = `${baseurl}/task`;
-export const getTaskById = `${baseurl}/task`;
+export const updateTask = (id) => `${baseurl}/task/${id}`;
+export const deleteTask = (id) => `${baseurl}/task/${id}`;
+export const getTaskById = (id) => `${baseurl}/task/${id}`;
 
-
+// Dashboard
+export const getDashboard = `${baseurl}/dashboard`;

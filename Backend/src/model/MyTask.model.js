@@ -16,7 +16,7 @@ const myTaskSchema = new mongoose.Schema({
     },
     categoryId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
+        ref: 'CategoryModel',
         required: true
     },
     statusId: {
@@ -29,6 +29,6 @@ const myTaskSchema = new mongoose.Schema({
         ref: 'TaskPriority',
         required: true
     }
-}{timestamps:true});
+}, {timestamps:true});
 
 module.exports = mongoose.model('MyTask', myTaskSchema);

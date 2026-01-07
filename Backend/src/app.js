@@ -4,6 +4,7 @@ const catagorRoute = require("./routes/category.routes")
 const taskStatusRoutes = require("./routes/taskStatus.routes")
 const taskPriorityRoutes = require("./routes/taskPriority.routes")
 const taskRoutes = require("./routes/MyTask.route")
+const dashboardRoutes = require("./routes/dashboard.routes")
 const cors = require("cors")
 const cookieParser = require("cookie-parser")
 const app = express();
@@ -23,6 +24,7 @@ app.use("/api/v1/category", catagorRoute)
 app.use("/api/v1/taskstatus", taskStatusRoutes)
 app.use("/api/v1/taskpriority", taskPriorityRoutes)
 app.use("/api/v1/task",taskRoutes )
+app.use("/api/v1/dashboard", dashboardRoutes)
 
 
 
